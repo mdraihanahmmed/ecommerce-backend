@@ -4,12 +4,14 @@ const dbConnection = require("./config/dbConnection.js");
 const routes = require("./routes");
 const cors = require("cors");
 const app = express();
+const path = require("path");
 
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
 app.use(cors());
 dbConnection();
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(routes);
 
 app.listen(8000);
